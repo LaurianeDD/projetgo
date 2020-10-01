@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Col, Row,Button,InputGroup,ListGroup,Container,Breadcrumb } from "react-bootstrap";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import moment from "moment";
 
 
 function AjouterProjet(props){
@@ -13,15 +13,20 @@ function AjouterProjet(props){
     const[titre,setTitre]=useState('');
     const[descCourte, setDescCourte]=useState('');
     const[sommaire, setSommaire]=useState('');
-
+    const[image, setImage]=useState(null);
     const[startDate, setStartDate]=useState(new Date());
     const[endDate, setEndDate]=useState(new Date());
 
+    function onChangeFileHandler(event){
+        setImage(new FormData().append(event.target.files[0],0));
+    }
     const handleSubmit=async(event)=> {
         event.preventDefault();
         try{
+            alert(props.memberSpecific);
+            console.log(startDate);
             const responsable = props.memberSpecific;
-            const response = await fetch(`http://localhost:5000/ajoutProjet/${titre}/${descCourte}/${sommaire}/${startDate}/${endDate}/${responsable}`,{
+            const response = await fetch(`http://localhost:5000/ajoutProjet/${titre}/${descCourte}/${sommaire}/${startDate}/${endDate}/${responsable}/${image}`,{
                 method:'put',
                 Header:{'Content-Type': 'application/json'}
             });
@@ -81,7 +86,7 @@ function AjouterProjet(props){
                         <Form.Label style={{textAlign: 'left'}}>Photo de presentation: </Form.Label>
                     </Col>
                     <Col lg="9">
-                        <Form.File id="exampleFormControlFile1"  />
+                        <Form.File onChange={onChangeFileHandler}id="exampleFormControlFile1"  />
                     </Col>
 
                 </Row><br />
@@ -90,7 +95,7 @@ function AjouterProjet(props){
                         <Form.Label style={{textAlign: 'left'}} >Date du debut estime: </Form.Label>
                     </Col>
                     <Col style={{color:'black'}} lg={6}>
-                        <DatePicker selected={startDate} onChange={date => setStartDate(date)}/>
+                        <DatePicker selected={startDate} onChange={date => setStartDate(moment(date).format('MM/DD/YYYY'))}/>
                     </Col>
                 </Row><br />
                 <Row>
@@ -98,7 +103,7 @@ function AjouterProjet(props){
                         <Form.Label style={{textAlign: 'left'}} >Date du fin de estime: </Form.Label>
                     </Col>
                     <Col lg={5}>
-                        <DatePicker selected={endDate} onChange={date => setEndDate(date)}/>
+                        <DatePicker selected={endDate} onChange={date => setEndDate(moment(date).format('MM/DD/YYYY'))}/>
                     </Col>
                     <Col lg={2}>
                         <Button onClick={handleSubmit} variant="secondary" style={{backgroundColor :'orange'}}>Soumettre le projet</Button>
