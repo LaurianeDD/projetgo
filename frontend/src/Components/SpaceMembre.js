@@ -13,14 +13,16 @@ function SpaceMembre(props){
     const [province, setProvince]=useState('');
     const [pays, setPays]=useState('');
     const [date, setDate]=useState('');
+
     const getInfo = async ()=>{
+
         try{
             const response = await fetch(`http://localhost:5000/login/${userName}`,{
                 method:'put',
                 Header:{'Content-Type': 'application/json'}
             });
             const jsonData=await response.json();
-            setNom(jsonData[0].nom);
+            console.log(jsonData);
             setPrenom(jsonData[0].prenom);
             setAddress(jsonData[0].adresse);
             //setVille(jsonData[0].ville);

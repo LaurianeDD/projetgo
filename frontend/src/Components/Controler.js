@@ -16,7 +16,7 @@ function Controler(){
         case 2:
             return(
                 <div>
-                    <AfficherMessage setPageNumber={setPageNumber} memberSpecific={memberSpecific}/>
+                    <AfficherMessage setPageNumber={setPageNumber} setMemberSpecific={setMemberSpecific}memberSpecific={memberSpecific}/>
 
                 </div>
             );

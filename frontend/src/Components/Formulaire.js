@@ -12,8 +12,9 @@ function Formulaire(props) {
         return email.length > 0 && password.length > 0;
     }
 
-
     const onSubmitForm=async(event)=> {
+
+        // Check whether the password and username are correct by sending the request to the backend.
         event.preventDefault();
         try{
 
@@ -22,7 +23,7 @@ function Formulaire(props) {
                 Header:{'Content-Type': 'application/json'}
             });
             const jsonData=await response.json();
-
+        // Verify the credentials
             searchCredentials(jsonData);
         }catch(err){
             console.log(err.message);
@@ -34,6 +35,10 @@ function Formulaire(props) {
     const [credentials,setCredentials]=useState('');
 
     function searchCredentials(jsonData){
+        // If the password and username are correct, true will be returned from the backend.
+        // If true, then the username will be kept and the pageNumber will be set to 2, displaying
+        // the welcome sign.
+        // If not, the warning sign will be set.
 
         if (jsonData==true) {
             props.setMemberSpecific(email);

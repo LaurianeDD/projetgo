@@ -14,19 +14,23 @@ function AfficherMessage(props){
         props.setPageNumber(3);
     }
     const [userName , setUserName] = useState(props.memberSpecific);
-
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] =useState('');
     const [statutadhesion, setStatutadhesion]=useState('');
     const getName = async ()=> {
         try {
+            // Getting the first name, last name, userID and status of the membership from the table
             const response = await fetch(`http://localhost:5000/login/${userName}`, {
                 method: 'put',
                 Header: {'Content-Type': 'application/json'}
             });
             const jsonData = await response.json();
+
             setNom(jsonData[0].nom);
             setPrenom(jsonData[0].prenom);
+
+            // Changing the username with userID for easier application later on
+            props.setMemberSpecific(jsonData[0].user_id);
 
             if (jsonData[0].statutadhesion == 'Actif') {
                 setStatutadhesion('Membre');
