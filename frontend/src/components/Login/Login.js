@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AfficherMessage from './AfficherMessage';
 import { Form, Col, Row, Button, InputGroup, FormControl, ListGroup } from "react-bootstrap";
+import ButtonPG from '../Buttons/ButtonPG';
 import { useHistory } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 
@@ -117,9 +118,11 @@ function Formulaire(props) {
             placeholder="Mot de passe"
           />
         </Form.Group>
-        <Button style={{ background: "orange" }} className="px-5 btn btn-danger" type='submit'>
-          GO
-                </Button>
+        <ButtonPG 
+          text="GO"
+          variant="orange"
+          type='submit'
+        />
       </Form>
     </div>
 
