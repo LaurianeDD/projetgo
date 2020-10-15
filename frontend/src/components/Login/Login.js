@@ -1,13 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../context/AuthContext/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AfficherMessage from './AfficherMessage';
-import { Form, Col, Row, Button, InputGroup, FormControl, ListGroup } from "react-bootstrap";
+import { Form, Col, Row, Button, InputGroup, FormControl, ListGroup, Nav } from "react-bootstrap";
+import { Modal, ModalBody } from 'react-bootstrap';
 import ButtonPG from '../Buttons/ButtonPG/ButtonPG';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext/AuthContext';
+import './Login.css';
 
-function Formulaire(props) {
+export default function Login() {
   const { dispatch } = useContext(AuthContext);
+  const [show, setShow] = useState(false);
   // const history = useHistory();
   // const [userName, setUserName] = useState("");
   // const [password, setPassword] = useState("");
@@ -92,46 +95,61 @@ function Formulaire(props) {
 
 
   return (
-    <div style={{ backgroundColor: '#138496' }}>
-      <hr style={{ backgroundColor: 'white ' }} />
-      <h4 style={{ color: 'white' }}>CONNEXION</h4>
-      <hr style={{ backgroundColor: 'white' }} />
-      <p style={{ fontSize: "15px" }} >{credentials}</p>
-      <Form
-        className="m-5"
-        onSubmit={handleFormSubmit}
+    <>
+      <Nav.Link onClick={() => setShow(true)}>
+        LOGIN
+      </Nav.Link>
+    
+      <Modal
+        className="login"
+        show={show}
+        onHide={() => setShow(false)}
+        centered
       >
-        <Form.Group className="mx-5 mb-4">
-          <Form.Control
-            className="px-5"
-            value={data.email}
-            onChange={handleInputChange}
-            placeholder="Courriel"
+        <Modal.Header >
+          <Modal.Title>
+            Connexion
+          </Modal.Title>
+        </Modal.Header>
+
+        <ModalBody>
+          <Form
+            className="m-5"
+            onSubmit={handleFormSubmit}
+          >
+            <Form.Group className="mx-5 mb-4">
+              <Form.Control
+                className="px-5"
+                value={data.email}
+                onChange={handleInputChange}
+                placeholder="Courriel"
+              />
+            </Form.Group>
+            <Form.Group className="mx-5 mb-4">
+              <Form.Control
+                className="px-5"
+                type="password"
+                value={data.password}
+                onChange={handleInputChange}
+                placeholder="Mot de passe"
+              />
+            </Form.Group>
+          </Form>
+          {data.erroMessage && (
+            <span className="error">{data.erroMessage}</span>
+          )}
+        </ModalBody>
+
+        <Modal.Footer>
+          <ButtonPG
+            className="btn-go"
+            text={data.isSubmitting ? ('...') : ('GO')}
+            variant="orange"
+            type='submit'
+            disabled={data.isSubmitting}
           />
-        </Form.Group>
-        <Form.Group className="mx-5 mb-4">
-          <Form.Control
-            className="px-5"
-            type="password"
-            value={data.password}
-            onChange={handleInputChange}
-            placeholder="Mot de passe"
-          />
-        </Form.Group>
-        <ButtonPG 
-          text="GO"
-          variant="orange"
-          type='submit'
-        />
-      </Form>
-    </div>
-
-
-
-
-
+        </Modal.Footer>
+      </Modal>
+    </>
   )
 }
-
-export default Formulaire;
-
