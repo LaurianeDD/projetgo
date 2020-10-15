@@ -4,7 +4,7 @@ import AfficherMessage from './AfficherMessage';
 import { Form, Col, Row, Button, InputGroup, FormControl, ListGroup } from "react-bootstrap";
 import ButtonPG from '../Buttons/ButtonPG/ButtonPG';
 import { useHistory } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext/AuthContext';
 
 function Formulaire(props) {
   const { dispatch } = useContext(AuthContext);
