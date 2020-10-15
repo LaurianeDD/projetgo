@@ -6,10 +6,10 @@ import './ButtonPG.css';
   BUTTON for projet Go
   Takes a string: as text on the button
   Takes a variant: orange or teal
-  Takes a size
-  Takes a function: as handleClick
+  Takes a size: sm, md or lg
+  Takes a function: as onClick
 */
-export default function ButtonPG({text, variant, size, handleClick}) {  
+export default function ButtonPG({text, variant, size, onClick}) {  
   //Set defaults values if missing props
   text = text || 'Button';
   size = size || 'md';
@@ -19,7 +19,7 @@ export default function ButtonPG({text, variant, size, handleClick}) {
     <Button
       className={size}
       variant={variant}
-      onClick={handleClick}
+      onClick={onClick}
     >
       {text}
     </Button>

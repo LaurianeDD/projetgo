@@ -11,9 +11,6 @@ import './Login.css';
 export default function Login() {
   const { dispatch } = useContext(AuthContext);
   const [show, setShow] = useState(false);
-  // const history = useHistory();
-  // const [userName, setUserName] = useState("");
-  // const [password, setPassword] = useState("");
 
   const initialState = {
     email: "",
@@ -32,8 +29,6 @@ export default function Login() {
   }
 
   const handleFormSubmit = async (event) => {
-
-    // Check whether the password and username are correct by sending the request to the backend.
     event.preventDefault();
 
     setData({
@@ -73,27 +68,6 @@ export default function Login() {
 
   }
 
-
-  const [credentials, setCredentials] = useState('');
-
-  // function searchCredentials(jsonData) {
-  //   // If the password and username are correct, true will be returned from the backend.
-  //   // If true, then the username will be kept and the pageNumber will be set to 2, displaying
-  //   // the welcome sign.
-  //   // If not, the warning sign will be set.
-  //   const checkResult = jsonData.check;
-  //   if (checkResult == true) {
-  //     console.log(jsonData.userID);
-  //     props.setLoggedInMemberID(jsonData.userID);
-  //     props.setLoggedin(true);
-  //     history.push('/welcome');
-  //   } else {
-  //     setCredentials('\n' + 'E-mail ou mot de passe incorret, veuillez réessayer.');
-  //   }
-
-  // }
-
-
   return (
     <>
       <Nav.Link onClick={() => setShow(true)}>
@@ -113,28 +87,23 @@ export default function Login() {
         </Modal.Header>
 
         <ModalBody>
-          <Form
-            className="m-5"
-            onSubmit={handleFormSubmit}
-          >
-            <Form.Group className="mx-5 mb-4">
+            <InputGroup className="mx-5 mb-4">              
               <Form.Control
-                className="px-5"
+                name="email"
                 value={data.email}
                 onChange={handleInputChange}
                 placeholder="Courriel"
               />
-            </Form.Group>
-            <Form.Group className="mx-5 mb-4">
+            </InputGroup>
+            <InputGroup className="mx-5 mb-4">
               <Form.Control
-                className="px-5"
                 type="password"
+                name="password"
                 value={data.password}
                 onChange={handleInputChange}
                 placeholder="Mot de passe"
               />
-            </Form.Group>
-          </Form>
+            </InputGroup>
           {data.erroMessage && (
             <span className="error">{data.erroMessage}</span>
           )}
@@ -145,7 +114,7 @@ export default function Login() {
             className="btn-go"
             text={data.isSubmitting ? ('...') : ('GO')}
             variant="orange"
-            type='submit'
+            onClick={handleFormSubmit}
             disabled={data.isSubmitting}
           />
         </Modal.Footer>
