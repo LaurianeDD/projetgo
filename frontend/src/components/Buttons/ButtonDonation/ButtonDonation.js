@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonPG from '../ButtonPG';
+import ButtonPG from '../ButtonPG/ButtonPG';
 import './ButtonDonation.css';
 
 export function ButtonDonation() {

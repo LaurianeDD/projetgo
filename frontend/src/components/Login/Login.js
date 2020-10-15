@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AfficherMessage from './AfficherMessage';
 import { Form, Col, Row, Button, InputGroup, FormControl, ListGroup } from "react-bootstrap";
-import ButtonPG from '../Buttons/ButtonPG';
+import ButtonPG from '../Buttons/ButtonPG/ButtonPG';
 import { useHistory } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 

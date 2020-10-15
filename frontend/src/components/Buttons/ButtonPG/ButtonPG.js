@@ -19,5 +19,3 @@ export default function ButtonPG({text, variant, handleClick}) {
     </Button>
   );
 }
-
-export default ButtonDonation;
