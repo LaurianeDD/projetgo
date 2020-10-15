@@ -4,9 +4,9 @@ import './ButtonPG.css';
 
 /*
   BUTTON for projet Go
-  Takes a string 
+  Takes a string: as text on the button
   Takes a variant: orange or teal
-  Takes a handleClick 
+  Takes a function: as handleClick
 */
 export default function ButtonPG({text, variant, handleClick}) {
 
