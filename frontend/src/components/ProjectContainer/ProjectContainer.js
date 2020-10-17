@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ProjectContainer() {
+export default function ProjectContainer({ match }) {
   return (
     <Card>
       <Card.Header>
@@ -9,17 +9,17 @@ export default function ProjectContainer() {
           defaultActiveKey="#details"
         >
           <Nav.Item>
-            <Nav.Link href="#details">
+            <Nav.Link href={`${match.url}/details`}>
               Détails
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="#reports">
+            <Nav.Link href={`${match.url}/reports`}>
               Rapports
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="#fundraising">
+            <Nav.Link href={`${match.url}/fundraising`}>
               Campagnes
             </Nav.Link>
           </Nav.Item>
