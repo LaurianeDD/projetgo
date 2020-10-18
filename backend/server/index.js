@@ -141,41 +141,17 @@ app.post("/login", async (req, res) => {
   
   // TODO find user
   try {
-    const user = await pool.query("SELECT * FROM utilisateur WHERE user_id=$1", [userLogin.userID]);
+    const user = await pool.query("SELECT * FROM utilisateur WHERE user_id = $1", [userLogin.userID]);
+    const member = await pool.query("SELECT * FROM member WHERE user_id = $1", [userLogin.userID]);
     res.cookie('Authtoken', authToken).json({
-      user: user.rows[0],      
+      user: user.rows[0],   
+      member: member.rows[0],   
     });
   } catch (err) {
     console.error(err.message);
   }
 
 });
-
-// create user space. Get all the value necessary using the username.
-app.put("/welcomePage/:userID", async (req, res) => {
-    try {
-        const userID = req.params.userID;
-
-        const userInfo = await pool.query("SELECT UTILISATEUR.nom, UTILISATEUR.prenom, UTILISATEUR.user_id, " +
-            "member.statutadhesion FROM UTILISATEUR INNER JOIN member ON member.user_id=utilisateur.user_id WHERE utilisateur.user_id=$1", [userID]);
-        //console.log(userInfo.rows.length);
-        res.json(userInfo.rows);
-    } catch (err) {
-        console.error(err.message);
-        console.error(err.message);
-    }
-})
-
-app.put("/userSpace/:userID", async (req, res) => {
-
-    try {
-        const userID = req.params.userID;
-        const userInfo = await pool.query("Select * FROM UTILISATEUR INNER JOIN login ON UTILISATEUR.user_id=login.user_id where login.user_id =$1", [userID]);
-        res.json(userInfo.rows);
-    } catch (err) {
-        console.error(err.message);
-    }
-})
 
 //Add project
 
@@ -314,12 +290,12 @@ app.post("/AjouterBenevole", async (req, res) => {
 
 
 // Detail of a specific project
-app.post("/projectDetail:projectID", async (req, res) => {
+app.get("/projects/:projectID", async (req, res) => {
     try {
 
         const projectID = req.params.projectID;
         const projectDetail = await pool.query("SELECT * FROM PROJECT WHERE PROJECT.code = $1", [projectID]);
-        res.json(projectDetail.rows);
+        res.json(projectDetail.rows[0]);
     } catch (err) {
         console.error(err.message);
     }

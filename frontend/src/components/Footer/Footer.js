@@ -8,7 +8,7 @@ import './Footer.css';
 import { AuthContext } from '../context/AuthContext/AuthContext';
 
 export function Footer() {
-  const { state: { isAuthenticated } } = useContext(AuthContext);
+  const { state: { isAuthenticated, member } } = useContext(AuthContext);
   const [projects, setProjects] = useState([]);
 
   const getProjects = async () => {
@@ -36,7 +36,6 @@ export function Footer() {
     );
   });
 
-
   return(
     <Container fluid>
       <Row>
@@ -52,11 +51,16 @@ export function Footer() {
             {isAuthenticated ? (
               <>
                 <li>
-                  <Link to="/membre/mesProjets">Mes projets</Link>
+                  <Link to="/membre/profil">Profil</Link>
                 </li>
                 <li>
-                  <Link to="/membre/mesProjets/nouveau">Creer nouveau projet</Link>
+                  <Link to="/membre/mesProjets">Mes projets</Link>
                 </li>
+                {!!member && (
+                  <li>
+                    <Link to="/membre/mesProjets/nouveau">Creer nouveau projet</Link>
+                  </li>
+                )}
               </>
             ) : (
               <>
