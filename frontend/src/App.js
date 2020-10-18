@@ -19,6 +19,7 @@ import ProjetDetails from "./components/Login/ProjetDetails";
 
 
 import Footer from './components/Footer/Footer';
+import ProjectContainer from './components/ProjectContainer/ProjectContainer';
 
 function App() {
 const [loggin, setLoggedin] =useState(false);
@@ -37,13 +38,12 @@ const [loggedInMemberID, setLoggedInMemberID]=useState('');
             <Route path="/welcome" component={()=><AfficherMessage loggedInMemberID={loggedInMemberID} setLoggedInMemberID={setLoggedInMemberID}/>}/>
             <Route path="/userSpace" component={()=><SpaceMembre loggedInMemberID={loggedInMemberID}/>}/>
             <Route path="/addProject" component={()=><AjouterProjet loggedInMemberID={loggedInMemberID}/>}/>
-            <Route path="/listMemberProject" component={()=><ListerProjects loggedInMemberID={loggedInMemberID} setProjetID={setProjetID}/>}/>
-            <Route path="/inscription-benevole" component={()=><FormulaireSignUpBenevole />}/>
-            <Route path="/inscription-membre" component={()=><FormulaireSignUpMembre />}/>
-            <Route path="/inscription-payment" component={()=><FormulairePayment />}/>
-            <Route path="/inscription" component={()=><ChoixMembership />}/>
-            <Route path="/projectDetails/:projectId" component={ProjetDetails}/>
-
+            <Route path="/listMemberProject" component={ListerProjects}/>
+            <Route path="/inscription-benevole" component={FormulaireSignUpBenevole}/>
+            <Route path="/inscription-membre" component={FormulaireSignUpMembre}/>
+            <Route path="/inscription-payment" component={FormulairePayment}/>
+            <Route path="/inscription" component={ChoixMembership}/>
+            <Route path="/myProjects/:projectId" component={ProjectContainer}/>
           </Switch>
         </Router>
         
