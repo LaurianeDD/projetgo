@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Col, Row, Button, ListGroup, Container, Image, Dropdown,DropdownButton} from "react-bootstrap";
-import Report from '../Report/Report';
 import { useLocation } from "react-router-dom";
 import EditProjects from "./EditProjects";
 import {storage} from "../../firebase";
@@ -387,9 +386,6 @@ function ProjetDetails({ match, loggedInMemberID }){
                         </Row>
                     </Container>
                 </div><br/><br/>
-            </Col>
-            <Col>
-                <Report project={projetId} />
             </Col>
         </Container>
     )

@@ -3,8 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row, Container, Image } from "react-bootstrap";
 import ButtonPG from '../Buttons/ButtonPG/ButtonPG';
 
-function ListerProjects({ match, history, loggedInMemberID, ...rest }) {
-  console.log('rest', rest, match, history);
+function ListerProjects({ match, history, loggedInMemberID }) {
   const displayList = async () => {
     try {
       const userID = loggedInMemberID = '3';
