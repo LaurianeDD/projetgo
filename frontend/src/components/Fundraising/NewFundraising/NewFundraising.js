@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Col, InputGroup, Form } from 'react-bootstrap';
 import ButtonPG from '../../Buttons/ButtonPG/ButtonPG';
 
-export default function NewFundraising({cancelClick}) {
+export default function NewFundraising({ history, match }) {
+  console.log('match', match);
   const initialState = {
-    projectId: null,
-    begin: null,
-    end: null,
-    goal: null,
+    projectId: match.params.projectId,
+    start: '',
+    end: '',
+    goal: '',
   }
 
   const [data, setData] = useState(initialState);
-
+  
   const handleChange = event => {
     setData({
       ...data,
@@ -19,28 +20,34 @@ export default function NewFundraising({cancelClick}) {
     });
   }
 
-  const handleSubmit = async (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
       //Write request
-      const response = await fetch('http://localhost:5000/projet/:id_projet/campaign', {
+      const response = await fetch('http://localhost:5000/projects/:projectId/campaign', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           projectId: data.projectId,
-          begin: data.begin,
+          start: data.start,
           end: data.end,
           goal: data.goal,
 
         }),
       });
 
-      setData(initialState);
+      if (!response.ok) {
+        throw response;
+      }
+      
+      const resJson = await response.json();
+      
+      history.go(-1);
 
     } catch (error) {
-      console.error('Failed to submit new campaign');
+      console.error(error.message || error.statusText);
     }
   };
 
@@ -48,10 +55,10 @@ export default function NewFundraising({cancelClick}) {
   
   return (
     <Form
-      onSubmit={handleSubmit}
+      onSubmit={handleFormSubmit}
     >
       <Form.Row>
-        <Col sm={3}>
+        <Col sm={4}>
           <Form.Label
             htmlFor="inlineFormInputBegin"
           >
@@ -60,13 +67,13 @@ export default function NewFundraising({cancelClick}) {
           <Form.Control
             className="mb-2"
             type="date" 
-            id="begin"
-            name="begin"
-            value={data.begin}
+            id="start"
+            name="start"
+            value={data.start}
             onChange={handleChange}
           />
         </Col>
-        <Col sm={3}>
+        <Col sm={4}>
           <Form.Label
             htmlFor="inlineFormInputEnd"          
           >
@@ -105,14 +112,25 @@ export default function NewFundraising({cancelClick}) {
           </InputGroup>
         </Col>
       </Form.Row>
-      <Form.Row>
-        <Link to="projectDetail/:projectId/funds" />
-        <ButtonPG
-          text="Valider"
-          size="sm"
-          variant="teal"
-          type="submit"
-        />
+      <Form.Row>      
+        <Col sm={{offset:7}}>
+          <ButtonPG 
+            variant="teal"
+            size="md"
+            type="button"
+            onClick={() => history.go(-1)}
+          >
+            Annuler
+          </ButtonPG>
+        </Col>
+        <Col>
+          <ButtonPG
+            size="md"
+            type="submit"
+          >
+            Valider
+          </ButtonPG>
+        </Col>
       </Form.Row>
     </Form>
   );

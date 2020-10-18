@@ -11,18 +11,12 @@ import './ButtonPG.css';
   Takes a type: submit, reset, button(default)
 */
 export default function ButtonPG({text, children, variant, size, onClick, type}) {  
-  //Set defaults values if missing props
-  text = text || 'Button';
-  size = size || 'md';
-  variant = variant || 'orange';
-  type = type || 'button';
-
   return (
     <Button
-      className={size}
-      variant={variant}
+      className={size || 'md'}
+      variant={variant || 'orange'}
       onClick={onClick}
-      type={type}
+      type={type || 'button'}
     >
       {text || children}
     </Button>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Col, Row, Nav, NavDropdown } from 'react-bootstrap';
 import { Image } from 'react-bootstrap';
 import logo from '../../assets/logo-projetgo.png';
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { withRouter } from 'react-router';
 import Login from '../Login/Login';
 
@@ -29,10 +29,10 @@ export function Header(props) {
         </Col>
         <Col lg={9}>
           <div>
-            <Container className="mt-5" style={{ visibility: stateVisibilityNotLoggedin }}>
+            <Container className="mt-5" style={{ visibility: 'hidden' }}>
               <Nav variant="tabs" defaultActiveKey="/">
                 <Nav.Item>
-                  <Link activeClassName="active" className="nav-dropdown" to="/">ACCUEIL</Link>
+                  <Nav.Link className="nav-dropdown" href="/">ACCUEIL</Nav.Link>
                 </Nav.Item>
                 <Nav.Item><Nav.Link className="nav-dropdown" href="/projects" eventKey="link-1">PROJETS</Nav.Link></Nav.Item>
                 <Nav.Item><Nav.Link className="nav-dropdown" href="/inscription" >INSCRIPTION</Nav.Link></Nav.Item>
@@ -41,14 +41,14 @@ export function Header(props) {
             </Container>
             <Container style={{ visibility: 'visible' }}>
               <Nav variant="tabs" defaultActiveKey="/">
-                <Nav.Item><NavLink className="nav-dropdown" onClick={() => history.push('/')}>ACCUEIL</NavLink></Nav.Item>
-                <Nav.Item ><NavLink className="nav-dropdown" onClick={() => history.push('/projects')}>PROJETS</NavLink></Nav.Item>
+                <Nav.Item><Nav.Link className="nav-dropdown" onClick={() => history.push('/')}>ACCUEIL</Nav.Link></Nav.Item>
+                <Nav.Item ><Nav.Link className="nav-dropdown" onClick={() => history.push('/projects')}>PROJETS</Nav.Link></Nav.Item>
                 <NavDropdown id="nav-dropdown" title="MEMBRE" id="nav-dropdown">
                   <NavDropdown.Item className="nav-dropdown" type='submit' onClick={() => history.push('/userSpace')}>Profil</NavDropdown.Item>
                   <NavDropdown.Item className="nav-dropdown" type='submit' onClick={() => history.push('/addProject')}>Créer un projet</NavDropdown.Item>
                   <NavDropdown.Item className="nav-dropdown" type='submit' onClick={() => history.push('/listMemberProject')} >Mes projets</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Item><NavLink className="nav-dropdown" href="/" > DÉCONNECTION</NavLink></Nav.Item>
+                <Nav.Item><Nav.Link className="nav-dropdown" href="/" > DÉCONNEXION</Nav.Link></Nav.Item>
 
               </Nav>
             </Container>

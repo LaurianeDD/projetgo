@@ -4,46 +4,66 @@ import ButtonPG from '../Buttons/ButtonPG/ButtonPG';
 import DonationsListing from './DonationsListing/DonationsListing';
 import NewFundraising from './NewFundraising/NewFundraising';
 
-export default function Fundraising() {
-  const [currentCampaign, setCurrentCampaign] = useState({});
-  const [showCreateNew, setShowCreateNew] = useState(false);
+export default function Fundraising({ match, history }) {
+  const [currentCampaign, setCurrentCampaign] = useState(null);
+  const [donations, setDonations] =useState([]);
+ 
+  //Need the fundraising for the project
+  useEffect( async() => {
+    try {
+      const response = await fetch(`http://localhost:5000/projects/${match.params.projectId}/campaign`);
 
-  const cancelNew = () => {
-    setShowCreateNew(false);
-  }
-  
+      if (!response.ok) {
+        throw response;
+      }
+
+      const resJson = await response.json();
+      setCurrentCampaign(resJson.data.campaign);
+    
+    } catch(error) {
+      console.log(error.message || error.statusText);
+    }
+  });
+
+  //Need the donations for the project
+  useEffect( async() => {
+    try {
+      const response = await fetch(`http://localhost:5000/projects/${match.params.projectId}/donations`);
+      
+      if (!response.ok) {
+        throw response;
+      }
+
+      const resJson = await response.json();
+      setDonations(resJson.data.donations);
+
+    } catch (error) {
+      console.log(error.message || error.statusText);
+    }
+  });
+
   const handleCreateClick = () => {
-    setShowCreateNew(true);
+    history.push(`${match.url}new`);
   };
-  
-  //Need the fundraising for this project if exist
-  useEffect();
   
   return (
     <Container>
       <Row>
-        {
-          currentCampaign ?
-          <Campaign /> : 
-          <ButtonPG 
-            text="Créer une campagne"
-            variant="orange"
-            size="lg"
-            onClick={handleCreateClick}
-          />
-        }
-      </Row>
+      ProjectId: {match.params.projectId}
       {
-        showCreateNew ?
-        <Row>
-          <NewFundraising cancelClick={cancelNew} />
-        </Row> :
-        <></>
+        currentCampaign ? 
+        'campaign' : 
+        <ButtonPG 
+          size="lg" 
+          onClick={handleCreateClick}
+        >
+          Créer une campagne
+        </ButtonPG>
       }
+      </Row>
+      
       <Row>
-        <Col>
-          <DonationsListing />
-        </Col>
+        <DonationsListing donations={donations}/>
       </Row>
     </Container>
   );
