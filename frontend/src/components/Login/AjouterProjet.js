@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Form, Col, Row, Button, Container, Breadcrumb} from "react-bootstrap";
+import { Form, Col, Row, Button, Container } from "react-bootstrap";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {storage} from "../../firebase";
@@ -77,10 +77,6 @@ function AjouterProjet(props) {
     return (
 
         <Container style={{fontSize: '20px'}}>
-            <Breadcrumb >
-                <Breadcrumb.Item onClick={goProfilMenu}>Profil</Breadcrumb.Item>
-                <Breadcrumb.Item active>Créer un projet</Breadcrumb.Item>
-            </Breadcrumb><br/><br/>
 
             <Form style={{textAlign: 'left'}}>
                 <Row>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Col, Row, Container, Breadcrumb, Image } from "react-bootstrap";
+import { Col, Row, Container, Image } from "react-bootstrap";
 import ButtonPG from '../Buttons/ButtonPG/ButtonPG';
 
 function ListerProjects({ match, history, loggedInMemberID, ...rest }) {
@@ -31,12 +31,6 @@ function ListerProjects({ match, history, loggedInMemberID, ...rest }) {
   return (
 
     <Container>
-      <Breadcrumb style={{ fontSize: "20px" }}>
-        <Breadcrumb.Item onClick={() => history.push("/membre")}>Profil</Breadcrumb.Item>
-        <Breadcrumb.Item active>Mes Projets</Breadcrumb.Item>
-      </Breadcrumb><br /><br />
-
-      <Form>
         {listProjects.map(project =>
           <div key={project.code}>
             <Row className="shadow p-3 mb-5 bg-white rounded p-4">
@@ -51,15 +45,13 @@ function ListerProjects({ match, history, loggedInMemberID, ...rest }) {
                   <div style={{ textAlign: 'left', fontSize: '18px' }}>{project.description}</div>
                 </Row><br />
                 <Row>
-                  <ButtonPG onClick={() => history.push(`/projectDetails/${project.code}`)}>
+                  <ButtonPG onClick={() => history.push(`${match.url}/${project.code}`)}>
                     Details
                   </ButtonPG>
                 </Row>
               </Col>
             </Row><br />
           </div>)}
-      </Form><br /><br />
-
     </Container>
 
   )

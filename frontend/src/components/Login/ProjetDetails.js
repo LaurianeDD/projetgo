@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Form, Col, Row, Button, ListGroup, Container, Breadcrumb, Image, Dropdown,DropdownButton} from "react-bootstrap";
+import {Form, Col, Row, Button, ListGroup, Container, Image, Dropdown,DropdownButton} from "react-bootstrap";
 import Report from '../Report/Report';
 import { useLocation } from "react-router-dom";
 import EditProjects from "./EditProjects";
@@ -309,11 +309,6 @@ function ProjetDetails({ match, loggedInMemberID }){
 
         <Container style={{textAlign:'left'}} >
             <Col>
-                <br/>
-                <Breadcrumb >
-                    <Breadcrumb.Item href="#">Profil</Breadcrumb.Item>
-                    <Breadcrumb.Item active>Project X</Breadcrumb.Item>
-                </Breadcrumb><br/>
                 <div style={{fontSize:'18px'}}>
                     <Row className="px-3">
 
