@@ -17,9 +17,9 @@ import { AuthContextProvider } from './components/context/AuthContext/AuthContex
 function App() {
   return (
     <AuthContextProvider>
-      <div className="App">
-        <div className="App-main">
-          <Router>
+      <Router>
+        <div className="App">
+          <div className="App-main">
             <Header />
             <Switch>
               <Route path="/" component={Home} exact />
@@ -31,13 +31,10 @@ function App() {
               
               <Route path="/membre" component={Membre} />
             </Switch>
-          </Router>
+            <Footer />
+          </div>
         </div>
-
-        <footer className="App-footer">
-          <Footer />
-        </footer>
-      </div>
+      </Router>
     </AuthContextProvider>
   );
 }

@@ -2,9 +2,19 @@ import React, { createContext, useReducer } from 'react';
 
 export const AuthContext = createContext();
 
+const loadUserFromStorage = () => {
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user;
+  } catch (err) {
+    localStorage.clear();
+    return null;
+  }
+};
+
 const initialState = {
-  isAuthenticated: !!localStorage.getItem('user'),
-  user: JSON.parse(localStorage.getItem('user')),
+  isAuthenticated: !!loadUserFromStorage(),
+  user: loadUserFromStorage(),
 };
 
 const reducer = (state, action) => {

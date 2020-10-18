@@ -5,7 +5,6 @@ import AfficherMessage from './AfficherMessage';
 import { Form, Col, Row, Button, InputGroup, FormControl, ListGroup, Nav } from "react-bootstrap";
 import { Modal, ModalBody } from 'react-bootstrap';
 import ButtonPG from '../Buttons/ButtonPG/ButtonPG';
-import { useHistory } from 'react-router-dom';
 import './Login.css';
 
 export default function Login() {
