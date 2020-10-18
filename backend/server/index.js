@@ -141,18 +141,14 @@ app.post("/login", async (req, res) => {
     authTokens[authToken] = userLogin
     console.log('Token'+authToken)
 
-    // Create error
-    // UnhandledPromiseRejectionWarning: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
-    //res.cookie('Authtoken', authToken);
   });
   
   // TODO find user
   try {
     const user = await pool.query("SELECT * FROM utilisateur WHERE user_id=$1", [userLogin.userID]);
     console.log('Find user***')
-    res.json({
-      user: user.rows[0],
-      token: authToken,
+    res.cookie('Authtoken', authToken).json({
+      user: user.rows[0],      
     });
   } catch (err) {
     console.error(err.message);
