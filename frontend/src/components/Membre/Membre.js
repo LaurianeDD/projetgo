@@ -13,34 +13,52 @@ export default function Membre({ match }) {
   return(
     <Container>
       <Breadcrumb>
-        <BreadcrumbItem>
+        <BreadcrumbItem href={`${match.url}/bienvenue`}>
           Membre
         </BreadcrumbItem>
-        <BreadcrumbItem>
-          <Switch>
-            <Route path={`${match.path}/bienvenue`}>Bienvenue</Route>
-            <Route path={`${match.path}/profil`}>Profil</Route>
-            <Route path={`${match.path}/mesProjets`}>Mes Projets</Route>
-          </Switch>
-        </BreadcrumbItem>
-        <Route path={`${match.path}/mesProjets`} render={(routeProps) => {
-          return (
-            <BreadcrumbItem>
-              <Switch>
-                <Route exact path={`${routeProps.match.path}/nouveau`}>Créer un projet</Route>
-                <Route path={`${routeProps.match.path}/:projectId`}>Projet</Route>
-              </Switch>
+        <Switch>
+          <Route path={`${match.path}/bienvenue`}>
+            <BreadcrumbItem active>
+              Bienvenue
             </BreadcrumbItem>
-          );
-        }} />
+          </Route>
+          <Route path={`${match.path}/profil`}>
+            <BreadcrumbItem active>
+              Profil
+            </BreadcrumbItem>
+          </Route>
+          <Route path={`${match.path}/mesProjets`} render={(routeProps) => {
+            if (routeProps.match.isExact) {
+              return (
+                <BreadcrumbItem active>
+                  Mes Projets
+                </BreadcrumbItem>
+              );
+            }
+
+            return (
+              <>
+                <BreadcrumbItem href={routeProps.match.url}>
+                  Mes Projets
+                </BreadcrumbItem>
+                <BreadcrumbItem active>
+                  <Switch>
+                    <Route exact path={`${routeProps.match.path}/nouveau`}>Créer un projet</Route>
+                    <Route path={`${routeProps.match.path}/:projectId`}>Projet</Route>
+                  </Switch>
+                </BreadcrumbItem>
+              </>
+            );
+          }} />
+        </Switch>
       </Breadcrumb>
-          <Switch>
-            <Route exact path={`${match.path}/bienvenue`} component={AfficherMessage}/>
-            <Route exact path={`${match.path}/profil`} component={Profile}/>
-            <Route exact path={`${match.path}/mesProjets/nouveau`} component={AjouterProjet}/>
-            <Route exact path={`${match.path}/mesProjets`} component={ListerProjects}/>
-            <Route path={`${match.path}/mesProjets/:projectId`} component={ProjectContainer}/>
-          </Switch>
+      <Switch>
+        <Route exact path={`${match.path}/bienvenue`} component={AfficherMessage}/>
+        <Route exact path={`${match.path}/profil`} component={Profile}/>
+        <Route exact path={`${match.path}/mesProjets/nouveau`} component={AjouterProjet}/>
+        <Route exact path={`${match.path}/mesProjets`} component={ListerProjects}/>
+        <Route path={`${match.path}/mesProjets/:projectId`} component={ProjectContainer}/>
+      </Switch>
     </Container>
  );
 }
