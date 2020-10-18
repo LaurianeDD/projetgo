@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, Container } from 'react-bootstrap';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 
 import Fundraising from '../Fundraising/Fundraising';
 import NewFundraising from '../Fundraising/NewFundraising/NewFundraising';
@@ -35,11 +35,11 @@ export default function ProjectContainer({ match }) {
         </Nav>
       
         <Switch>
-          <Route path={`${match.path}/`} component={ProjetDetails} exact />
           <Route path={`${match.path}/details`} component={ProjetDetails} exact />
             {/*<Route path={`${match.path}/reports`} component={span} exact /> */}
-          <Route path={`${match.path}/fundraising`} component={Fundraising} exact />
-          <Route path={`${match.path}/fundraising/new`} component={NewFundraising} exact />
+          <Route path={`${match.path}/financement`} component={Fundraising} exact />
+          <Route path={`${match.path}/financement/nouveau`} component={NewFundraising} exact />
+          <Redirect from={`${match.path}/`} to={`${match.path}/details`} />
         </Switch>
      
     </Container>
