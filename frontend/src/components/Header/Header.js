@@ -44,7 +44,7 @@ export function Header(props) {
                 <Nav.Item><Nav.Link className="nav-dropdown" onClick={() => history.push('/')}>ACCUEIL</Nav.Link></Nav.Item>
                 <Nav.Item ><Nav.Link className="nav-dropdown" onClick={() => history.push('/projects')}>PROJETS</Nav.Link></Nav.Item>
                 <NavDropdown id="nav-dropdown" title="MEMBRE" id="nav-dropdown">
-                  <NavDropdown.Item className="nav-dropdown" type='submit' onClick={() => history.push('/userSpace')}>Profil</NavDropdown.Item>
+                  <NavDropdown.Item className="nav-dropdown" type='submit' onClick={() => history.push('/membre')}>Profil</NavDropdown.Item>
                   <NavDropdown.Item className="nav-dropdown" type='submit' onClick={() => history.push('/addProject')}>Créer un projet</NavDropdown.Item>
                   <NavDropdown.Item className="nav-dropdown" type='submit' onClick={() => history.push('/listMemberProject')} >Mes projets</NavDropdown.Item>
                 </NavDropdown>

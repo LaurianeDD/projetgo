@@ -71,7 +71,7 @@ function AjouterProjet(props) {
         event.preventDefault();
     }
     function goProfilMenu(){
-        history.push("/userSpace");
+        history.push("/membre");
     }
 
     return (

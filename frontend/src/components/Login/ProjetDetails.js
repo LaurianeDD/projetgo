@@ -10,7 +10,10 @@ import {storage} from "../../firebase";
 
 
 
-function ProjetDetails(props){
+function ProjetDetails({ match, loggedInMemberID }){
+
+    const member=loggedInMemberID;
+    const projetId = match.params.projetId
     //Adding and deleting members and volunteers
     const location = useLocation();
     const [memberName, setMemberName]=useState('');
@@ -191,9 +194,9 @@ function ProjetDetails(props){
     const getProjectDetail = async ()=> {
         try {
 
-            const body = {projetID};
+            const body = {projetID: projetId};
             // Getting the first name, last name, userID and status of the membership from the table
-            const response = await fetch(`http://localhost:5000/projectDetail${projetID}`, {
+            const response = await fetch(`http://localhost:5000/projectDetail${projetId}`, {
                 method: 'post',
                 Header: {'Content-Type': 'application/json'},
                 body: JSON.stringify(body)
@@ -216,22 +219,22 @@ function ProjetDetails(props){
             setImage(jsonData[0].image);
             setResponsable(jsonData[0].responsable);
 
-            const responseMembre = await fetch(`http://localhost:5000/VoirMembreProjet/${projetID}`);
+            const responseMembre = await fetch(`http://localhost:5000/VoirMembreProjet/${projetId}`);
             const jsonDataMembreList = await responseMembre.json();
 
             setArrayAddedAlreadyMembers(jsonDataMembreList);
 
-            const responseBenevole = await fetch(`http://localhost:5000/VoirBenevoleProjet/${projetID}`);
+            const responseBenevole = await fetch(`http://localhost:5000/VoirBenevoleProjet/${projetId}`);
             const jsonDataBenevoleList = await responseBenevole.json();
             setArrayAddedAlreadyBenevoles(jsonDataBenevoleList)
 
 
-            const responseAllMembre = await fetch(`http://localhost:5000/allMembers/${projetID}`);
+            const responseAllMembre = await fetch(`http://localhost:5000/allMembers/${projetId}`);
 
             const jsonDataAllMemberList = await responseAllMembre.json();
             setArrayMembersDB(jsonDataAllMemberList);
 
-            const responseAllBenevole = await fetch(`http://localhost:5000/allBenevoles/${projetID}`);
+            const responseAllBenevole = await fetch(`http://localhost:5000/allBenevoles/${projetId}`);
 
             const jsonDataAllBenevoleList = await responseAllBenevole.json();
             setArrayBenevolesDB(jsonDataAllBenevoleList);
@@ -250,9 +253,6 @@ function ProjetDetails(props){
     useEffect(()=>{
         getProjectDetail();
     },[]);
-
-    const member=props.loggedInMemberID;
-    const projetID=props.projetID
 
     useEffect(()=>{
         if (member === responsable) {
@@ -279,7 +279,7 @@ function ProjetDetails(props){
                     .getDownloadURL()
                     .then( async image => {
                         try {
-                            const responsable = props.loggedInMemberID;
+                            const responsable = loggedInMemberID;
                             const body = {title, description, sommaire, statutprojet, debutestime, finestime, budget, totalfondscoll, totaldepense, debutreel, debutfin, etatavancement, responsable, image};
 
                             const response = await fetch("http://localhost:5000/editProjet/", {
@@ -394,7 +394,7 @@ function ProjetDetails(props){
                 </div><br/><br/>
             </Col>
             <Col>
-                <Report project={projetID} />
+                <Report project={projetId} />
             </Col>
         </Container>
     )
