@@ -113,7 +113,6 @@ app.post("/login", async (req, res) => {
   }
   
   if (!login || !login.rowCount) {
-    console.log('check login ***')
     res.status(401).json({
       message: 'Invalid username or password',
     });
@@ -124,13 +123,12 @@ app.post("/login", async (req, res) => {
     userID: login.rows[0].user_id,
     username: login.rows[0].username,
     password: login.rows[0].password,
-  }
+  };
   
   //Check Password  
   let authToken;
   bcrypt.compare(password, userLogin.password, async (err, result) => {
     if (!result) {
-      console.log('bcrypt ***')
       res.status(401).json({
         message: 'Invalid username or password',
       });
@@ -139,14 +137,11 @@ app.post("/login", async (req, res) => {
 
     authToken = generateAuthToken();
     authTokens[authToken] = userLogin
-    console.log('Token'+authToken)
-
   });
   
   // TODO find user
   try {
     const user = await pool.query("SELECT * FROM utilisateur WHERE user_id=$1", [userLogin.userID]);
-    console.log('Find user***')
     res.cookie('Authtoken', authToken).json({
       user: user.rows[0],      
     });
@@ -155,12 +150,6 @@ app.post("/login", async (req, res) => {
   }
 
 });
-
-
-
-    
-
-
 
 // create user space. Get all the value necessary using the username.
 app.put("/welcomePage/:userID", async (req, res) => {

@@ -10,7 +10,6 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      console.log('action: ', action);
       localStorage.setItem('user', JSON.stringify(action.payload.user));
       return {
         ...state,
