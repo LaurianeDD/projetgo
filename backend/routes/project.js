@@ -148,7 +148,7 @@ router.get("/:projectID", async (req, res) => {
     try {
         const projectID = req.params.projectID;
         const projectDetail = await db.query("SELECT * FROM PROJECT WHERE PROJECT.code = $1", [projectID]);
-        res.json(projectDetail.rows);
+        res.json(projectDetail.rows[0]);
     } catch (err) {
         console.error(err.message);
     }
