@@ -21,7 +21,6 @@ function reducer(state, action) {
       };
 
     case 'UPDATE':
-      console.log('action', action);
       return {
         ...state,
         [action.payload.key]: action.payload.value,
@@ -32,10 +31,11 @@ function reducer(state, action) {
   }
 }
 
-function ProjetDetails({ match }) {
+function ProjetDetails({ match, currentProject: initialCurrentProject }) {
   const { state: { user } } = useContext(AuthContext);
   const history = useHistory();
-  const [currentProject, dispatch] = useReducer(reducer, {});
+  const [currentProject, dispatch] = useReducer(reducer, initialCurrentProject);
+  
   const isCurrentUserResponsable = currentProject.responsable === user.user_id;
   const projetId = match.params.projectId;
   //Adding and deleting members and volunteers
@@ -112,15 +112,7 @@ function ProjetDetails({ match }) {
   }
 
   //Edit info part
-  const getProjectDetail = async () => {
-    try {
-      const response = await fetch(`/project/${projetId}`);
-      const jsonData = await response.json();
-      dispatch({ type: 'LOAD', payload: jsonData });
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
+  
 
   const getParticipantsList = async () => {
       const responseMembre = await fetch(`/project/${projetId}/members`);
@@ -184,8 +176,11 @@ function ProjetDetails({ match }) {
 
   useEffect(() => {
     getParticipantsList();
-    getProjectDetail();
-  }, [projetId])
+  }, [projetId]);
+
+  useEffect(() => {
+    dispatch({type: 'LOAD', payload: initialCurrentProject});
+  }, [initialCurrentProject.code]);
 
   return (
     <div style={{ textAlign: 'left' }} >
