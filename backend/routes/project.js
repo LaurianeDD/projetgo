@@ -131,7 +131,7 @@ router.post("/:projectID/member", async (req, res) => {
 router.post("/:projectID/benevole", async (req, res) => {
     try {
         const code = req.params.projectID;
-        const user_id = req.body;
+        const user_id = req.body.user_id;
         const role = "Benevole"
         const newComite = await db.query("INSERT INTO participant (projet, user_id, comite) VALUES($1, $2 ,$3) RETURNING *",
           [code, user_id, role]
