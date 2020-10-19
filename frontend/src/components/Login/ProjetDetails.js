@@ -24,9 +24,6 @@ function ProjetDetails({ match, loggedInMemberID }){
     const [initialValueMember, setInitialValueMember] = useState(true);
     const [check, setCheck] = useState(true);
 
-    console.log(match);
-    console.log(projectId);
-
 
     const [arrayAddedAlreadyBenevoles, setArrayAddedAlreadyBenevoles]=useState([]);
 
