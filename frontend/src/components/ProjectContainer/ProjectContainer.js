@@ -36,7 +36,7 @@ export default function ProjectContainer({ match }) {
   return (
     <Container>
       <div style={{backgroundColor:'white'}} className="shadow rounded p-5">
-        {!!isCurrentUserResponsable && (
+        {isCurrentUserResponsable && (
           <Nav
             variant="tabs"
             defaultActiveKey="#details"
@@ -62,9 +62,9 @@ export default function ProjectContainer({ match }) {
         
         <Switch>
           <Route path={`${match.path}/details`} render={(routeProps) => <ProjetDetails {...routeProps} currentProject={currentProject}/>} exact />
-          {!!isCurrentUserResponsable && <Route path={`${match.path}/rapports`} component={Report} exact /> }
-          {!!isCurrentUserResponsable && <Route path={`${match.path}/financement`} component={Fundraising} exact /> }
-          {!!isCurrentUserResponsable && <Route path={`${match.path}/financement/nouveau`} component={NewFundraising} exact /> }
+          {isCurrentUserResponsable && <Route path={`${match.path}/rapports`} component={Report} exact /> }
+          {isCurrentUserResponsable && <Route path={`${match.path}/financement`} component={Fundraising} exact /> }
+          {isCurrentUserResponsable && <Route path={`${match.path}/financement/nouveau`} component={NewFundraising} exact /> }
           <Redirect to={`${match.url}/details`} />
         </Switch>
       </div>
