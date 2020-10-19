@@ -10,7 +10,7 @@ import './ButtonPG.css';
   Takes a function: as onClick
   Takes a type: submit, reset, button(default)
 */
-export default function ButtonPG({text, children, variant, size, onClick, type, disabled}) {  
+export default function ButtonPG({className, text, children, variant, size, onClick, type, disabled, style}) {  
   return (
     <Button
       className={size || 'md'}
@@ -18,6 +18,8 @@ export default function ButtonPG({text, children, variant, size, onClick, type, 
       onClick={onClick}
       type={type || 'button'}
       disabled={disabled}
+      className={className}
+      style={style}
     >
       {text || children}
     </Button>

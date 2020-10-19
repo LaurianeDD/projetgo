@@ -13,43 +13,43 @@ export default function ProjectContainer({ match }) {
   const isDetailsMatch = useRouteMatch(`${match.path}/details`);
   const isReportsMatch = useRouteMatch(`${match.path}/rapports`);
   const isFundraisingMatch = useRouteMatch(`${match.path}/financement`);
+  console.log('match.path', match.path);
 
   return (
     <Container>
-      {!!member && (
-        <Nav
-          variant="tabs"
-          defaultActiveKey="#details"
-        >
-          <Nav.Item>
-            <Nav.Link href={`${match.url}/details`} active={isDetailsMatch}>
-              Détails
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href={`${match.url}/rapports`} active={isReportsMatch}>
-              Comptes rendus
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href={`${match.url}/financement`} active={isFundraisingMatch}>
-              Financement
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-      )}
-      
+      <div style={{backgroundColor:'white'}} className="shadow rounded p-5">
+        {!!member && (
+          <Nav
+            variant="tabs"
+            defaultActiveKey="#details"
+            className="mb-4"
+          >
+            <Nav.Item>
+              <Nav.Link href={`${match.url}/details`} active={isDetailsMatch}>
+                Détails
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href={`${match.url}/rapports`} active={isReportsMatch}>
+                Comptes rendus
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href={`${match.url}/financement`} active={isFundraisingMatch}>
+                Financement
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        )}
+        
         <Switch>
           <Route path={`${match.path}/details`} component={ProjetDetails} exact />
-          {!!member && (
-            <>
-              <Route path={`${match.path}/rapports`} component={Report} exact />
-              <Route path={`${match.path}/financement`} component={Fundraising} exact />
-              <Route path={`${match.path}/financement/nouveau`} component={NewFundraising} exact />
-            </>
-          )}
-          <Redirect exact from={`${match.path}/`} to={`${match.path}/details`} />
+          {!!member && <Route path={`${match.path}/rapports`} component={Report} exact /> }
+          {!!member && <Route path={`${match.path}/financement`} component={Fundraising} exact /> }
+          {!!member && <Route path={`${match.path}/financement/nouveau`} component={NewFundraising} exact /> }
+          <Redirect to={`${match.url}/details`} />
         </Switch>
+      </div>
      
     </Container>
   );
