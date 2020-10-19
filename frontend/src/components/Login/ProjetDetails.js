@@ -117,6 +117,7 @@ function ProjetDetails({ match }) {
       const response = await fetch(`/project/${projetId}`);
       const jsonData = await response.json();
       dispatch({ type: 'LOAD', payload: jsonData });
+      console.log('JSON DATA', jsonData);
     } catch (err) {
       console.log(err.message);
     }
