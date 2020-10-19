@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Timeline, TimelineBlip, TimelineEvent} from 'react-event-timeline';
+import {Timeline, TimelineEvent} from 'react-event-timeline';
 import {Check, ConeStriped, ExclamationTriangle, GearFill, Plus, TrashFill} from 'react-bootstrap-icons';
 import moment from 'moment';
 import './Report.css';
