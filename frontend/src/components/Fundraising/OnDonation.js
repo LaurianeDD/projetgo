@@ -1,4 +1,3 @@
-import React from 'react';
 import moment from "moment";
 
 async function OnDonation( res,fundraising_id,price,resCard ) {
