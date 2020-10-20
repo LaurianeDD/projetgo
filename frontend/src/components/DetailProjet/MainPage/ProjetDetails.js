@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Col, Row, Button, ListGroup, Image, Dropdown, DropdownButton, ProgressBar } from "react-bootstrap";
+import { Col, Row, Image, Dropdown, DropdownButton, ProgressBar } from "react-bootstrap";
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import './ProjetDetails.css';
