@@ -20,7 +20,7 @@ async function OnDonation( res, fundraising_id, price, resCard ) {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body)
         });
-    }catch (err) {
+    } catch (err) {
         console.log(err.message);
         alert("Problème lors de création du don.")
     }
