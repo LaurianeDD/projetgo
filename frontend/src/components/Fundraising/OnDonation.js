@@ -13,7 +13,6 @@ async function OnDonation( res, fundraising_id, price, resCard ) {
     const adresse = resCard;
 
 
-
     try{
         const body = {fundraising,datedon,montant,typepaiement,nom,prenom,email,phone,adresse};
 
