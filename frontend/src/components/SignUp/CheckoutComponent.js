@@ -6,7 +6,7 @@ import OnDonation from "../Fundraising/OnDonation"
 
 const CheckoutComponent = ({price, source, user_id, fundraising_id}) => {
     const history = useHistory();
-    const priceForStripe = price*100;
+    const priceForStripe = price * 100;
     const type = source;
     const publishableKey = 'pk_test_51HYwKuBamjKTPrkZqdhyI3YZ8enwYg3TAeGcNt7mwP5cOgPliDZDW1oEJ5ZwHMleyKUYceYkHUkSe1rVVOVb6Yxt000IGUfKG3';
 
