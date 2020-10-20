@@ -33,6 +33,10 @@ export default function ProjectContainer({ match }) {
     getProjectDetail();
   }, [projetId])
 
+  if (!currentProject.responsable) {
+    return null;
+  }
+
   return (
     <Container>
       <div style={{backgroundColor:'white'}} className="shadow rounded p-5">
