@@ -39,7 +39,7 @@ function MontantDonation() {
                 value={montant}
                 onChange={handleOnChange}
                 placeholder="Minimum 1 $"
-                isInvalid={montant<1}
+                isInvalid={montant < 1}
                 type={"number"}
             />
             <Form.Row className="justify-content-md-center p-2">
