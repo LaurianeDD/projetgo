@@ -12,7 +12,6 @@ async function OnDonation( res, fundraising_id, price, resCard ) {
     const phone = "514-333-1234";
     const adresse = resCard;
 
-
     try{
         const body = {fundraising, datedon, montant, typepaiement, nom, prenom, email, phone, adresse};
 
