@@ -12,7 +12,6 @@ function MontantDonation() {
 
     useEffect(() => {
         setFundraising_Id(location.state.id);
-        console.log(location.pathname); // result: '/secondpage'// result: '?query=abc'
         console.log(location.state.id); // result: 'some_value'
 
     }, [location]);
