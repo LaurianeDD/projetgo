@@ -1,6 +1,6 @@
 import moment from "moment";
 
-async function OnDonation( res,fundraising_id,price,resCard ) {
+async function OnDonation( res, fundraising_id, price, resCard ) {
     const datedon = moment().format("YYYY-MM-DD");
 
     const fundraising = fundraising_id;
