@@ -33,7 +33,7 @@ function MontantDonation() {
         <Form onSubmit={handleSubmit}>
             <Form.Label className="mx-4 mb-2"> Donation pour le projet: </Form.Label>
             <Form.Label className="mx-10 mb-2" >{location.state.projet} </Form.Label>
-            <Form.Text className="mx-5">> Entrez le montant de votre donation </Form.Text>
+            <Form.Text className="mx-5"> Entrez le montant de votre donation </Form.Text>
             <Form.Control
                 name="montant"
                 value={montant}
