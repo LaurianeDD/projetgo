@@ -48,6 +48,7 @@ function ProjetDetails({ match, currentProject: initialCurrentProject }) {
   const [arrayMembersDB, setArrayMembersDB] = useState([]);
   const [arrayBenevolesDB, setArrayBenevolesDB] = useState([]);
   const [arrayAddedAlreadyMembers, setArrayAddedAlreadyMembers] = useState([]);
+  const [currentFundraising, dispatchTwo] = useReducer(reducer, {});
 
   const editProjectInfo = (key, value) => {
     dispatch({ type: 'UPDATE', payload: { key, value }})
@@ -113,6 +114,16 @@ function ProjetDetails({ match, currentProject: initialCurrentProject }) {
 
   //Edit info part
   
+
+  const getFundraisingDetail = async () => {
+    try {
+      const response = await fetch(`/project/${projetId}/campaign`);
+      const jsonData = await response.json();
+      dispatchTwo({ type: 'LOAD', payload: jsonData });
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   const getParticipantsList = async () => {
       const responseMembre = await fetch(`/project/${projetId}/members`);
@@ -180,6 +191,7 @@ function ProjetDetails({ match, currentProject: initialCurrentProject }) {
 
   useEffect(() => {
     dispatch({type: 'LOAD', payload: initialCurrentProject});
+    getFundraisingDetail();
   }, [initialCurrentProject.code]);
 
   return (
@@ -255,7 +267,7 @@ function ProjetDetails({ match, currentProject: initialCurrentProject }) {
             <p><b>Montant amassé:</b></p>
           </Col>
           <Col lg={9} >
-            <ProgressBar className="mt-2" striped variant="success" now={currentProject.totalfondscoll ?? 0} max={currentProject.objectif} label={`${currentProject.totalfondscoll ?? 0}$`} />
+            <ProgressBar className="mt-2" striped variant="success" now={currentProject.totalfondscoll ?? 0} max={currentFundraising.objectif ?? 0} label={`${currentProject.totalfondscoll ?? 0}$`} />
           </Col>
         </Row>
       </div>
