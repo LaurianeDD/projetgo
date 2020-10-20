@@ -14,7 +14,7 @@ async function OnDonation( res, fundraising_id, price, resCard ) {
 
 
     try{
-        const body = {fundraising,datedon,montant,typepaiement,nom,prenom,email,phone,adresse};
+        const body = {fundraising, datedon, montant, typepaiement, nom, prenom, email, phone, adresse};
 
         const response = await fetch(`/payment/don`, {
             method: "POST",
