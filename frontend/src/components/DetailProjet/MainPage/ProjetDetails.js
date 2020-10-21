@@ -267,7 +267,7 @@ function ProjetDetails({ match, currentProject: initialCurrentProject }) {
             <p><b>Montant amassé:</b></p>
           </Col>
           <Col lg={9} >
-            <ProgressBar className="mt-2" striped variant="success" now={currentProject.totalfondscoll ?? 0} max={currentFundraising.objectif ?? 0} label={`${currentProject.totalfondscoll ?? 0}$`} />
+            <ProgressBar className="mt-2" striped variant="info" now={currentProject.totalfondscoll ?? 0} max={currentFundraising.objectif ?? 0} label={`${currentProject.totalfondscoll ?? 0}$`} />
           </Col>
         </Row>
       </div>
